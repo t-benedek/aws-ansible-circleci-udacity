@@ -13,7 +13,7 @@ jobs:
     docker:
       - image: cimg/base:2021.04
     steps: 
-      checkout
+      - checkout
       - run: 
         name: simulate error
         command: |
