@@ -1,0 +1,37 @@
+version: 2.1
+
+commands:
+  destroy_infrastructure:
+    steps:
+      - run:
+          name: destroy created infrastructure
+          command: |
+            aws cloudformation delete-stack --stack-name my-stack
+
+jobs:
+  smoke_test:
+    docker:
+      - image: cimg/base:2021.04
+    steps: 
+      checkout
+      - run: 
+        name: simulate error
+        command: |
+          return 1
+      - destroy_infrastructure
+        when: on_fail 
+  create_infrastructure:
+    docker:
+      - image: amazon/aws-cli
+    steps:
+      - checkout
+      - run:
+          name: Ensure backend infrastructure exist
+          command: |
+            aws cloudformation deploy \
+              --template-file template.yml \
+              --stack-name my-stack
+workflows:
+  my_workflow:
+    jobs:
+      - create_infrastructure
