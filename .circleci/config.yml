@@ -11,7 +11,7 @@ commands:
 jobs:
   smoke_test:
     docker:
-      - image: cimg/base:2021.04
+      - image: amazon/aws-cli
     steps: 
       - checkout
       - run: 
