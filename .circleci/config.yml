@@ -15,11 +15,11 @@ jobs:
     steps: 
       - checkout
       - run: 
-        name: simulate error
-        command: |
-          return 1
+          name: simulate error
+          command: |
+            return 1
       - destroy_infrastructure:
-        when: on_fail 
+          when: on_fail
   create_infrastructure:
     docker:
       - image: amazon/aws-cli
