@@ -1,4 +1,5 @@
-# Combination of several technonogies for CI / CD in my udacity course
-## Ansible
-## Circle CI
-## AWS CLI
+# Using different technologies learned at udacity
+* Ansible
+* AWS-CLI
+* Circle-CI
+
