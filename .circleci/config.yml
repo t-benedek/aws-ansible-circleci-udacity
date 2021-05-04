@@ -16,10 +16,14 @@ jobs:
       - checkout
       - run: 
           name: simulate error
-          command: |
+          command: | 
             return 1
-      - destroy_infrastructure:
+      - run:
+          name: destroy created infrastructure
+          command: |
+            aws cloudformation delete-stack --stack-name my-stack
           when: on_fail
+  
   create_infrastructure:
     docker:
       - image: amazon/aws-cli
@@ -38,5 +42,5 @@ workflows:
     jobs:
       - create_infrastructure
       - smoke_test:
-        requires:
-          - create_infrastructure
+          requires:
+           - create_infrastructure
