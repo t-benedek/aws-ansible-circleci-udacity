@@ -18,7 +18,7 @@ jobs:
         name: simulate error
         command: |
           return 1
-      - destroy_infrastructure
+      - destroy_infrastructure:
         when: on_fail 
   create_infrastructure:
     docker:
